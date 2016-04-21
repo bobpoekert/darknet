@@ -8,7 +8,7 @@ VPATH=./src/
 EXEC=darknet
 OBJDIR=./obj/
 
-CC=gcc
+CC=clang-3.6
 NVCC=nvcc
 OPTS=-Ofast
 LDFLAGS= -lm -pthread -lstdc++ 

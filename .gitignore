@@ -3,6 +3,7 @@
 *.csv
 *.out
 *.png
+*.weights
 mnist/
 data/
 caffe/
@@ -14,6 +15,8 @@ decaf/
 submission/
 cfg/
 darknet
+python/build
+python/*.so
 
 # OS Generated #
 .DS_Store*
