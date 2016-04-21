@@ -9,7 +9,7 @@ objfiles = [os.path.abspath('../obj/%s' % f) for f in os.listdir('%s/../obj' % h
 os.environ['CC'] = 'clang-3.6'
 
 extensions = [
-        Extension('yolo', ['yolo.pyx'], extra_objects=objfiles)
+        Extension('c_yolo', ['c_yolo.pyx'], extra_objects=objfiles)
         ]
 
 setup(

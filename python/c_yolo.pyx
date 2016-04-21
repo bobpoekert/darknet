@@ -1,6 +1,7 @@
 import numpy as np
 cimport numpy as np
 from libc.stdlib cimport free
+import os
 
 cdef extern from "../src/layer.h":
     ctypedef struct layer:
@@ -52,6 +53,8 @@ cdef class YOLONet:
     cdef float thresh
 
     def __cinit__(self, bytes cfgfile, bytes weightfile):
+        assert os.path.exists(cfgfile), 'net config file does not exist'
+        assert os.path.exists(weightfile), 'weight file does not exist'
         self.nms = 0.4
         self.thresh = 0.2
         cdef network net = parse_network_cfg(cfgfile)
