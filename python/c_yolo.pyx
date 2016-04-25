@@ -1,7 +1,9 @@
 import numpy as np
 cimport numpy as np
+from cython cimport view
 
 from libc.stdlib cimport free, calloc
+from libc.string cimport memcpy
 import os
 
 cdef extern from "../src/layer.h":
@@ -10,7 +12,6 @@ cdef extern from "../src/layer.h":
         int n
         int sqrt
         int classes
-
 
 cdef extern from "../src/box.h":
     ctypedef struct box:
@@ -60,6 +61,25 @@ cdef class Image:
     # since we don't copy the buffer into img, just point to it
     cdef np.ndarray ndarray
 
+    def to_ndarray(self):
+        cdef int width = self.img.w
+        cdef int height = self.img.h
+        cdef int channels = self.img.c
+        cdef int size = width * height * channels * sizeof(float)
+        cdef np.ndarray res
+        if self.ndarray is not None:
+            return self.ndarray
+        else:
+            res = np.empty((height, width, channels), dtype=np.float32, order='C')
+            memcpy(res.data, <char *> self.img.data, size)
+            return res
+
+    @staticmethod
+    def from_ndarray(arr):
+        res = Image()
+        res.set_ndarray(arr)
+        return res
+
     def width(self):
         return self.img.w
 
@@ -73,7 +93,7 @@ cdef class Image:
         return self.img
 
     cdef c_set_ndarray(self, np.ndarray inp):
-        cdef np.ndarray floats = inp.astype(np.float32)
+        cdef np.ndarray floats = inp.astype(np.float32, order='C')
         self.ndarray = floats
         cdef image input_image
         input_image.w = floats.shape[0]
@@ -93,6 +113,7 @@ cdef class Image:
             free_image(self.img)
 
     cdef Image c_resize(self, int w, int h):
+        print w, h
         cdef image resized = resize_image(self.img, w, h)
         cdef Image res = Image()
         res.set_image(resized)

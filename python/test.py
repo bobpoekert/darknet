@@ -23,7 +23,9 @@ class TestYoloNet(unittest.TestCase):
         self.assertEqual(resized.height(), 300)
 
     def test_predict(self):
-        self.assertIsInstance(yolo.yolo_net().predict(self.test_image), list)
+        predictions = yolo.yolo_net().predict(self.test_image)
+        self.assertIsInstance(predictions, list)
+        self.assertTrue(any([v > 0 for row in predictions for v in row[4]]), 'probs are all zero')
 
 if __name__ == '__main__':
     unittest.main()

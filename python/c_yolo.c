@@ -797,7 +797,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
-/* "python/c_yolo.pyx":55
+/* "python/c_yolo.pyx":56
  *     void load_weights(network *net, char *filename)
  * 
  * cdef class Image:             # <<<<<<<<<<<<<<
@@ -812,7 +812,7 @@ struct __pyx_obj_6python_6c_yolo_Image {
 };
 
 
-/* "python/c_yolo.pyx":104
+/* "python/c_yolo.pyx":124
  *         return self.c_resize(w, h)
  * 
  * cdef class YOLONet:             # <<<<<<<<<<<<<<
@@ -829,7 +829,7 @@ struct __pyx_obj_6python_6c_yolo_YOLONet {
 
 
 
-/* "python/c_yolo.pyx":55
+/* "python/c_yolo.pyx":56
  *     void load_weights(network *net, char *filename)
  * 
  * cdef class Image:             # <<<<<<<<<<<<<<
@@ -846,7 +846,7 @@ struct __pyx_vtabstruct_6python_6c_yolo_Image {
 static struct __pyx_vtabstruct_6python_6c_yolo_Image *__pyx_vtabptr_6python_6c_yolo_Image;
 
 
-/* "python/c_yolo.pyx":104
+/* "python/c_yolo.pyx":124
  *         return self.c_resize(w, h)
  * 
  * cdef class YOLONet:             # <<<<<<<<<<<<<<
@@ -947,22 +947,22 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
 #define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
 #endif
 
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
-#endif
-
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
-
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
-
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
 
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
 
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
+
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
+#endif
+
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
 static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
     const char *name, int exact);
@@ -1046,6 +1046,8 @@ static CYTHON_INLINE void __Pyx_RaiseNoneNotIterableError(void);
 static int __Pyx_SetVtable(PyObject *dict, void *vtable);
 
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
+
+static PyObject *__Pyx_GetNameInClass(PyObject *nmspace, PyObject *name);
 
 typedef struct {
     int code_line;
@@ -1223,6 +1225,10 @@ static PyTypeObject *__pyx_ptype_5numpy_ndarray = 0;
 static PyTypeObject *__pyx_ptype_5numpy_ufunc = 0;
 static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, char *, char *, int *); /*proto*/
 
+/* Module declarations from 'cython.view' */
+
+/* Module declarations from 'cython' */
+
 /* Module declarations from 'python.c_yolo' */
 static PyTypeObject *__pyx_ptype_6python_6c_yolo_Image = 0;
 static PyTypeObject *__pyx_ptype_6python_6c_yolo_YOLONet = 0;
@@ -1230,10 +1236,12 @@ static PyTypeObject *__pyx_ptype_6python_6c_yolo_YOLONet = 0;
 int __pyx_module_is_main_python__c_yolo = 0;
 
 /* Implementation of 'python.c_yolo' */
+static PyObject *__pyx_builtin_staticmethod;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_RuntimeError;
 static char __pyx_k_B[] = "B";
+static char __pyx_k_C[] = "C";
 static char __pyx_k_H[] = "H";
 static char __pyx_k_I[] = "I";
 static char __pyx_k_L[] = "L";
@@ -1253,11 +1261,15 @@ static char __pyx_k_Zf[] = "Zf";
 static char __pyx_k_Zg[] = "Zg";
 static char __pyx_k_np[] = "np";
 static char __pyx_k_os[] = "os";
+static char __pyx_k_arr[] = "arr";
+static char __pyx_k_res[] = "res";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_path[] = "path";
 static char __pyx_k_test[] = "__test__";
 static char __pyx_k_dtype[] = "dtype";
+static char __pyx_k_empty[] = "empty";
 static char __pyx_k_numpy[] = "numpy";
+static char __pyx_k_order[] = "order";
 static char __pyx_k_range[] = "range";
 static char __pyx_k_width[] = "width";
 static char __pyx_k_astype[] = "astype";
@@ -1269,29 +1281,39 @@ static char __pyx_k_float32[] = "float32";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static char __pyx_k_weightfile[] = "weightfile";
+static char __pyx_k_set_ndarray[] = "set_ndarray";
 static char __pyx_k_RuntimeError[] = "RuntimeError";
+static char __pyx_k_from_ndarray[] = "from_ndarray";
+static char __pyx_k_staticmethod[] = "staticmethod";
 static char __pyx_k_predict_image[] = "predict_image";
+static char __pyx_k_python_c_yolo[] = "python.c_yolo";
 static char __pyx_k_predict_ndarray[] = "predict_ndarray";
 static char __pyx_k_weight_file_does_not_exist[] = "weight file does not exist";
 static char __pyx_k_ndarray_is_not_C_contiguous[] = "ndarray is not C contiguous";
+static char __pyx_k_home_bob_darknet_python_c_yolo[] = "/home/bob/darknet/python/c_yolo.pyx";
 static char __pyx_k_net_config_file_does_not_exist[] = "net config file does not exist";
 static char __pyx_k_unknown_dtype_code_in_numpy_pxd[] = "unknown dtype code in numpy.pxd (%d)";
 static char __pyx_k_Format_string_allocated_too_shor[] = "Format string allocated too short, see comment in numpy.pxd";
 static char __pyx_k_Non_native_byte_order_not_suppor[] = "Non-native byte order not supported";
 static char __pyx_k_ndarray_is_not_Fortran_contiguou[] = "ndarray is not Fortran contiguous";
 static char __pyx_k_Format_string_allocated_too_shor_2[] = "Format string allocated too short.";
+static PyObject *__pyx_n_s_C;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor;
 static PyObject *__pyx_kp_u_Format_string_allocated_too_shor_2;
 static PyObject *__pyx_kp_u_Non_native_byte_order_not_suppor;
 static PyObject *__pyx_n_s_RuntimeError;
 static PyObject *__pyx_n_s_ValueError;
+static PyObject *__pyx_n_s_arr;
 static PyObject *__pyx_n_s_astype;
 static PyObject *__pyx_n_s_cfgfile;
 static PyObject *__pyx_n_s_dtype;
+static PyObject *__pyx_n_s_empty;
 static PyObject *__pyx_n_s_exists;
 static PyObject *__pyx_n_s_float32;
+static PyObject *__pyx_n_s_from_ndarray;
 static PyObject *__pyx_n_s_h;
 static PyObject *__pyx_n_s_height;
+static PyObject *__pyx_kp_s_home_bob_darknet_python_c_yolo;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_kp_u_ndarray_is_not_C_contiguous;
@@ -1299,24 +1321,31 @@ static PyObject *__pyx_kp_u_ndarray_is_not_Fortran_contiguou;
 static PyObject *__pyx_kp_s_net_config_file_does_not_exist;
 static PyObject *__pyx_n_s_np;
 static PyObject *__pyx_n_s_numpy;
+static PyObject *__pyx_n_s_order;
 static PyObject *__pyx_n_s_os;
 static PyObject *__pyx_n_s_path;
 static PyObject *__pyx_n_s_predict_image;
 static PyObject *__pyx_n_s_predict_ndarray;
+static PyObject *__pyx_n_s_python_c_yolo;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_range;
+static PyObject *__pyx_n_s_res;
+static PyObject *__pyx_n_s_set_ndarray;
+static PyObject *__pyx_n_s_staticmethod;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_w;
 static PyObject *__pyx_kp_s_weight_file_does_not_exist;
 static PyObject *__pyx_n_s_weightfile;
 static PyObject *__pyx_n_s_width;
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_width(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_2height(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_4channels(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_6set_ndarray(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_inp); /* proto */
-static void __pyx_pf_6python_6c_yolo_5Image_8__dealloc__(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_10resize(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_w, PyObject *__pyx_v_h); /* proto */
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_to_ndarray(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_2from_ndarray(PyObject *__pyx_v_arr); /* proto */
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_4width(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_6height(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_8channels(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_10set_ndarray(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_inp); /* proto */
+static void __pyx_pf_6python_6c_yolo_5Image_12__dealloc__(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_14resize(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_w, PyObject *__pyx_v_h); /* proto */
 static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_6c_yolo_YOLONet *__pyx_v_self, PyObject *__pyx_v_cfgfile, PyObject *__pyx_v_weightfile); /* proto */
 static void __pyx_pf_6python_6c_yolo_7YOLONet_2__dealloc__(struct __pyx_obj_6python_6c_yolo_YOLONet *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6python_6c_yolo_YOLONet *__pyx_v_self, PyObject *__pyx_v_thing); /* proto */
@@ -1332,9 +1361,381 @@ static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_tuple__7;
+static PyObject *__pyx_codeobj__8;
 
-/* "python/c_yolo.pyx":63
+/* "python/c_yolo.pyx":64
  *     cdef np.ndarray ndarray
+ * 
+ *     def to_ndarray(self):             # <<<<<<<<<<<<<<
+ *         cdef int width = self.img.w
+ *         cdef int height = self.img.h
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_1to_ndarray(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_1to_ndarray(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("to_ndarray (wrapper)", 0);
+  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_to_ndarray(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_to_ndarray(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
+  int __pyx_v_width;
+  int __pyx_v_height;
+  int __pyx_v_channels;
+  int __pyx_v_size;
+  PyArrayObject *__pyx_v_res = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_8 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("to_ndarray", 0);
+
+  /* "python/c_yolo.pyx":65
+ * 
+ *     def to_ndarray(self):
+ *         cdef int width = self.img.w             # <<<<<<<<<<<<<<
+ *         cdef int height = self.img.h
+ *         cdef int channels = self.img.c
+ */
+  __pyx_t_1 = __pyx_v_self->img.w;
+  __pyx_v_width = __pyx_t_1;
+
+  /* "python/c_yolo.pyx":66
+ *     def to_ndarray(self):
+ *         cdef int width = self.img.w
+ *         cdef int height = self.img.h             # <<<<<<<<<<<<<<
+ *         cdef int channels = self.img.c
+ *         cdef int size = width * height * channels * sizeof(float)
+ */
+  __pyx_t_1 = __pyx_v_self->img.h;
+  __pyx_v_height = __pyx_t_1;
+
+  /* "python/c_yolo.pyx":67
+ *         cdef int width = self.img.w
+ *         cdef int height = self.img.h
+ *         cdef int channels = self.img.c             # <<<<<<<<<<<<<<
+ *         cdef int size = width * height * channels * sizeof(float)
+ *         cdef np.ndarray res
+ */
+  __pyx_t_1 = __pyx_v_self->img.c;
+  __pyx_v_channels = __pyx_t_1;
+
+  /* "python/c_yolo.pyx":68
+ *         cdef int height = self.img.h
+ *         cdef int channels = self.img.c
+ *         cdef int size = width * height * channels * sizeof(float)             # <<<<<<<<<<<<<<
+ *         cdef np.ndarray res
+ *         if self.ndarray is not None:
+ */
+  __pyx_v_size = (((__pyx_v_width * __pyx_v_height) * __pyx_v_channels) * (sizeof(float)));
+
+  /* "python/c_yolo.pyx":70
+ *         cdef int size = width * height * channels * sizeof(float)
+ *         cdef np.ndarray res
+ *         if self.ndarray is not None:             # <<<<<<<<<<<<<<
+ *             return self.ndarray
+ *         else:
+ */
+  __pyx_t_2 = (((PyObject *)__pyx_v_self->ndarray) != Py_None);
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "python/c_yolo.pyx":71
+ *         cdef np.ndarray res
+ *         if self.ndarray is not None:
+ *             return self.ndarray             # <<<<<<<<<<<<<<
+ *         else:
+ *             res = np.empty((width, height, channels), dtype=np.float32, order='C')
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(((PyObject *)__pyx_v_self->ndarray));
+    __pyx_r = ((PyObject *)__pyx_v_self->ndarray);
+    goto __pyx_L0;
+
+    /* "python/c_yolo.pyx":70
+ *         cdef int size = width * height * channels * sizeof(float)
+ *         cdef np.ndarray res
+ *         if self.ndarray is not None:             # <<<<<<<<<<<<<<
+ *             return self.ndarray
+ *         else:
+ */
+  }
+
+  /* "python/c_yolo.pyx":73
+ *             return self.ndarray
+ *         else:
+ *             res = np.empty((width, height, channels), dtype=np.float32, order='C')             # <<<<<<<<<<<<<<
+ *             memcpy(res.data, <char *> self.img.data, size)
+ *             return res
+ */
+  /*else*/ {
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_empty); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_width); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_height); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_channels); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_GIVEREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_6);
+    __Pyx_GIVEREF(__pyx_t_7);
+    PyTuple_SET_ITEM(__pyx_t_8, 2, __pyx_t_7);
+    __pyx_t_4 = 0;
+    __pyx_t_6 = 0;
+    __pyx_t_7 = 0;
+    __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_GIVEREF(__pyx_t_8);
+    PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_8);
+    __pyx_t_8 = 0;
+    __pyx_t_8 = PyDict_New(); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_8);
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_float32); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_dtype, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_order, __pyx_n_s_C) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 73; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_v_res = ((PyArrayObject *)__pyx_t_4);
+    __pyx_t_4 = 0;
+
+    /* "python/c_yolo.pyx":74
+ *         else:
+ *             res = np.empty((width, height, channels), dtype=np.float32, order='C')
+ *             memcpy(res.data, <char *> self.img.data, size)             # <<<<<<<<<<<<<<
+ *             return res
+ * 
+ */
+    memcpy(__pyx_v_res->data, ((char *)__pyx_v_self->img.data), __pyx_v_size);
+
+    /* "python/c_yolo.pyx":75
+ *             res = np.empty((width, height, channels), dtype=np.float32, order='C')
+ *             memcpy(res.data, <char *> self.img.data, size)
+ *             return res             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(((PyObject *)__pyx_v_res));
+    __pyx_r = ((PyObject *)__pyx_v_res);
+    goto __pyx_L0;
+  }
+
+  /* "python/c_yolo.pyx":64
+ *     cdef np.ndarray ndarray
+ * 
+ *     def to_ndarray(self):             # <<<<<<<<<<<<<<
+ *         cdef int width = self.img.w
+ *         cdef int height = self.img.h
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_AddTraceback("python.c_yolo.Image.to_ndarray", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_res);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "python/c_yolo.pyx":78
+ * 
+ *     @staticmethod
+ *     def from_ndarray(arr):             # <<<<<<<<<<<<<<
+ *         res = Image()
+ *         res.set_ndarray(arr)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_3from_ndarray(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_6python_6c_yolo_5Image_3from_ndarray = {"from_ndarray", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_3from_ndarray, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_3from_ndarray(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_arr = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("from_ndarray (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_arr,0};
+    PyObject* values[1] = {0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_arr)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "from_ndarray") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+    }
+    __pyx_v_arr = values[0];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("from_ndarray", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("python.c_yolo.Image.from_ndarray", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_2from_ndarray(__pyx_v_arr);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_2from_ndarray(PyObject *__pyx_v_arr) {
+  struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_res = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("from_ndarray", 0);
+
+  /* "python/c_yolo.pyx":79
+ *     @staticmethod
+ *     def from_ndarray(arr):
+ *         res = Image()             # <<<<<<<<<<<<<<
+ *         res.set_ndarray(arr)
+ *         return res
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6python_6c_yolo_Image), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 79; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_res = ((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "python/c_yolo.pyx":80
+ *     def from_ndarray(arr):
+ *         res = Image()
+ *         res.set_ndarray(arr)             # <<<<<<<<<<<<<<
+ *         return res
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_res), __pyx_n_s_set_ndarray); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_arr); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
+    __Pyx_INCREF(__pyx_v_arr);
+    __Pyx_GIVEREF(__pyx_v_arr);
+    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_arr);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 80; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "python/c_yolo.pyx":81
+ *         res = Image()
+ *         res.set_ndarray(arr)
+ *         return res             # <<<<<<<<<<<<<<
+ * 
+ *     def width(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(((PyObject *)__pyx_v_res));
+  __pyx_r = ((PyObject *)__pyx_v_res);
+  goto __pyx_L0;
+
+  /* "python/c_yolo.pyx":78
+ * 
+ *     @staticmethod
+ *     def from_ndarray(arr):             # <<<<<<<<<<<<<<
+ *         res = Image()
+ *         res.set_ndarray(arr)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("python.c_yolo.Image.from_ndarray", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_res);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "python/c_yolo.pyx":83
+ *         return res
  * 
  *     def width(self):             # <<<<<<<<<<<<<<
  *         return self.img.w
@@ -1342,19 +1743,19 @@ static PyObject *__pyx_tuple__6;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_1width(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_1width(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_5width(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_5width(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("width (wrapper)", 0);
-  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_width(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_4width(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_width(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_4width(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1363,7 +1764,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_width(struct __pyx_obj_6python_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("width", 0);
 
-  /* "python/c_yolo.pyx":64
+  /* "python/c_yolo.pyx":84
  * 
  *     def width(self):
  *         return self.img.w             # <<<<<<<<<<<<<<
@@ -1371,14 +1772,14 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_width(struct __pyx_obj_6python_
  *     def height(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->img.w); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->img.w); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 84; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "python/c_yolo.pyx":63
- *     cdef np.ndarray ndarray
+  /* "python/c_yolo.pyx":83
+ *         return res
  * 
  *     def width(self):             # <<<<<<<<<<<<<<
  *         return self.img.w
@@ -1396,7 +1797,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_width(struct __pyx_obj_6python_
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":66
+/* "python/c_yolo.pyx":86
  *         return self.img.w
  * 
  *     def height(self):             # <<<<<<<<<<<<<<
@@ -1405,19 +1806,19 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_width(struct __pyx_obj_6python_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_3height(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_3height(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_7height(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_7height(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("height (wrapper)", 0);
-  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_2height(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_6height(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_2height(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_6height(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1426,7 +1827,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_2height(struct __pyx_obj_6pytho
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("height", 0);
 
-  /* "python/c_yolo.pyx":67
+  /* "python/c_yolo.pyx":87
  * 
  *     def height(self):
  *         return self.img.h             # <<<<<<<<<<<<<<
@@ -1434,13 +1835,13 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_2height(struct __pyx_obj_6pytho
  *     def channels(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->img.h); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 67; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->img.h); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 87; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "python/c_yolo.pyx":66
+  /* "python/c_yolo.pyx":86
  *         return self.img.w
  * 
  *     def height(self):             # <<<<<<<<<<<<<<
@@ -1459,7 +1860,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_2height(struct __pyx_obj_6pytho
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":69
+/* "python/c_yolo.pyx":89
  *         return self.img.h
  * 
  *     def channels(self):             # <<<<<<<<<<<<<<
@@ -1468,19 +1869,19 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_2height(struct __pyx_obj_6pytho
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_5channels(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_5channels(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_9channels(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_9channels(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("channels (wrapper)", 0);
-  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_4channels(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_8channels(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_4channels(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_8channels(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1489,7 +1890,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_4channels(struct __pyx_obj_6pyt
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("channels", 0);
 
-  /* "python/c_yolo.pyx":70
+  /* "python/c_yolo.pyx":90
  * 
  *     def channels(self):
  *         return self.img.c             # <<<<<<<<<<<<<<
@@ -1497,13 +1898,13 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_4channels(struct __pyx_obj_6pyt
  *     cdef image get_image(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->img.c); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 70; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->img.c); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 90; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "python/c_yolo.pyx":69
+  /* "python/c_yolo.pyx":89
  *         return self.img.h
  * 
  *     def channels(self):             # <<<<<<<<<<<<<<
@@ -1522,7 +1923,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_4channels(struct __pyx_obj_6pyt
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":72
+/* "python/c_yolo.pyx":92
  *         return self.img.c
  * 
  *     cdef image get_image(self):             # <<<<<<<<<<<<<<
@@ -1535,7 +1936,7 @@ static image __pyx_f_6python_6c_yolo_5Image_get_image(struct __pyx_obj_6python_6
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_image", 0);
 
-  /* "python/c_yolo.pyx":73
+  /* "python/c_yolo.pyx":93
  * 
  *     cdef image get_image(self):
  *         return self.img             # <<<<<<<<<<<<<<
@@ -1545,7 +1946,7 @@ static image __pyx_f_6python_6c_yolo_5Image_get_image(struct __pyx_obj_6python_6
   __pyx_r = __pyx_v_self->img;
   goto __pyx_L0;
 
-  /* "python/c_yolo.pyx":72
+  /* "python/c_yolo.pyx":92
  *         return self.img.c
  * 
  *     cdef image get_image(self):             # <<<<<<<<<<<<<<
@@ -1559,11 +1960,11 @@ static image __pyx_f_6python_6c_yolo_5Image_get_image(struct __pyx_obj_6python_6
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":75
+/* "python/c_yolo.pyx":95
  *         return self.img
  * 
  *     cdef c_set_ndarray(self, np.ndarray inp):             # <<<<<<<<<<<<<<
- *         cdef np.ndarray floats = inp.astype(np.float32)
+ *         cdef np.ndarray floats = inp.astype(np.float32, order='C')
  *         self.ndarray = floats
  */
 
@@ -1576,59 +1977,45 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("c_set_ndarray", 0);
 
-  /* "python/c_yolo.pyx":76
+  /* "python/c_yolo.pyx":96
  * 
  *     cdef c_set_ndarray(self, np.ndarray inp):
- *         cdef np.ndarray floats = inp.astype(np.float32)             # <<<<<<<<<<<<<<
+ *         cdef np.ndarray floats = inp.astype(np.float32, order='C')             # <<<<<<<<<<<<<<
  *         self.ndarray = floats
  *         cdef image input_image
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_inp), __pyx_n_s_astype); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_inp), __pyx_n_s_astype); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float32); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float32); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = NULL;
-  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-  } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_5);
-    __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
-    __Pyx_GIVEREF(__pyx_t_4);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_4);
-    __pyx_t_4 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 76; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_v_floats = ((PyArrayObject *)__pyx_t_1);
-  __pyx_t_1 = 0;
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3);
+  __pyx_t_3 = 0;
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_order, __pyx_n_s_C) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 96; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_v_floats = ((PyArrayObject *)__pyx_t_4);
+  __pyx_t_4 = 0;
 
-  /* "python/c_yolo.pyx":77
+  /* "python/c_yolo.pyx":97
  *     cdef c_set_ndarray(self, np.ndarray inp):
- *         cdef np.ndarray floats = inp.astype(np.float32)
+ *         cdef np.ndarray floats = inp.astype(np.float32, order='C')
  *         self.ndarray = floats             # <<<<<<<<<<<<<<
  *         cdef image input_image
  *         input_image.w = floats.shape[0]
@@ -1639,7 +2026,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
   __Pyx_DECREF(((PyObject *)__pyx_v_self->ndarray));
   __pyx_v_self->ndarray = __pyx_v_floats;
 
-  /* "python/c_yolo.pyx":79
+  /* "python/c_yolo.pyx":99
  *         self.ndarray = floats
  *         cdef image input_image
  *         input_image.w = floats.shape[0]             # <<<<<<<<<<<<<<
@@ -1648,7 +2035,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
  */
   __pyx_v_input_image.w = (__pyx_v_floats->dimensions[0]);
 
-  /* "python/c_yolo.pyx":80
+  /* "python/c_yolo.pyx":100
  *         cdef image input_image
  *         input_image.w = floats.shape[0]
  *         input_image.h = floats.shape[1]             # <<<<<<<<<<<<<<
@@ -1657,7 +2044,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
  */
   __pyx_v_input_image.h = (__pyx_v_floats->dimensions[1]);
 
-  /* "python/c_yolo.pyx":81
+  /* "python/c_yolo.pyx":101
  *         input_image.w = floats.shape[0]
  *         input_image.h = floats.shape[1]
  *         input_image.c = floats.shape[2]             # <<<<<<<<<<<<<<
@@ -1666,7 +2053,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
  */
   __pyx_v_input_image.c = (__pyx_v_floats->dimensions[2]);
 
-  /* "python/c_yolo.pyx":82
+  /* "python/c_yolo.pyx":102
  *         input_image.h = floats.shape[1]
  *         input_image.c = floats.shape[2]
  *         input_image.data = <float *> floats.data             # <<<<<<<<<<<<<<
@@ -1675,7 +2062,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
  */
   __pyx_v_input_image.data = ((float *)__pyx_v_floats->data);
 
-  /* "python/c_yolo.pyx":83
+  /* "python/c_yolo.pyx":103
  *         input_image.c = floats.shape[2]
  *         input_image.data = <float *> floats.data
  *         self.img = input_image             # <<<<<<<<<<<<<<
@@ -1684,11 +2071,11 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
  */
   __pyx_v_self->img = __pyx_v_input_image;
 
-  /* "python/c_yolo.pyx":75
+  /* "python/c_yolo.pyx":95
  *         return self.img
  * 
  *     cdef c_set_ndarray(self, np.ndarray inp):             # <<<<<<<<<<<<<<
- *         cdef np.ndarray floats = inp.astype(np.float32)
+ *         cdef np.ndarray floats = inp.astype(np.float32, order='C')
  *         self.ndarray = floats
  */
 
@@ -1700,7 +2087,6 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_AddTraceback("python.c_yolo.Image.c_set_ndarray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
@@ -1710,7 +2096,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":85
+/* "python/c_yolo.pyx":105
  *         self.img = input_image
  * 
  *     def set_ndarray(self, inp):             # <<<<<<<<<<<<<<
@@ -1719,19 +2105,19 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_c_set_ndarray(struct __pyx_obj_6
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_7set_ndarray(PyObject *__pyx_v_self, PyObject *__pyx_v_inp); /*proto*/
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_7set_ndarray(PyObject *__pyx_v_self, PyObject *__pyx_v_inp) {
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_11set_ndarray(PyObject *__pyx_v_self, PyObject *__pyx_v_inp); /*proto*/
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_11set_ndarray(PyObject *__pyx_v_self, PyObject *__pyx_v_inp) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_ndarray (wrapper)", 0);
-  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_6set_ndarray(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self), ((PyObject *)__pyx_v_inp));
+  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_10set_ndarray(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self), ((PyObject *)__pyx_v_inp));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_6set_ndarray(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_inp) {
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_10set_ndarray(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_inp) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1740,19 +2126,19 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_6set_ndarray(struct __pyx_obj_6
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_ndarray", 0);
 
-  /* "python/c_yolo.pyx":86
+  /* "python/c_yolo.pyx":106
  * 
  *     def set_ndarray(self, inp):
  *         self.c_set_ndarray(inp)             # <<<<<<<<<<<<<<
  * 
  *     cdef set_image(self, image img):
  */
-  if (!(likely(((__pyx_v_inp) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_inp, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_self->__pyx_vtab)->c_set_ndarray(__pyx_v_self, ((PyArrayObject *)__pyx_v_inp)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!(likely(((__pyx_v_inp) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_inp, __pyx_ptype_5numpy_ndarray))))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_self->__pyx_vtab)->c_set_ndarray(__pyx_v_self, ((PyArrayObject *)__pyx_v_inp)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "python/c_yolo.pyx":85
+  /* "python/c_yolo.pyx":105
  *         self.img = input_image
  * 
  *     def set_ndarray(self, inp):             # <<<<<<<<<<<<<<
@@ -1773,7 +2159,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_6set_ndarray(struct __pyx_obj_6
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":88
+/* "python/c_yolo.pyx":108
  *         self.c_set_ndarray(inp)
  * 
  *     cdef set_image(self, image img):             # <<<<<<<<<<<<<<
@@ -1786,7 +2172,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_set_image(struct __pyx_obj_6pyth
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_image", 0);
 
-  /* "python/c_yolo.pyx":89
+  /* "python/c_yolo.pyx":109
  * 
  *     cdef set_image(self, image img):
  *         self.img = img             # <<<<<<<<<<<<<<
@@ -1795,7 +2181,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_set_image(struct __pyx_obj_6pyth
  */
   __pyx_v_self->img = __pyx_v_img;
 
-  /* "python/c_yolo.pyx":88
+  /* "python/c_yolo.pyx":108
  *         self.c_set_ndarray(inp)
  * 
  *     cdef set_image(self, image img):             # <<<<<<<<<<<<<<
@@ -1810,7 +2196,7 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_set_image(struct __pyx_obj_6pyth
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":91
+/* "python/c_yolo.pyx":111
  *         self.img = img
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -1819,24 +2205,24 @@ static PyObject *__pyx_f_6python_6c_yolo_5Image_set_image(struct __pyx_obj_6pyth
  */
 
 /* Python wrapper */
-static void __pyx_pw_6python_6c_yolo_5Image_9__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_6python_6c_yolo_5Image_9__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_6python_6c_yolo_5Image_13__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_6python_6c_yolo_5Image_13__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_6python_6c_yolo_5Image_8__dealloc__(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
+  __pyx_pf_6python_6c_yolo_5Image_12__dealloc__(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_6python_6c_yolo_5Image_8__dealloc__(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
+static void __pyx_pf_6python_6c_yolo_5Image_12__dealloc__(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "python/c_yolo.pyx":92
+  /* "python/c_yolo.pyx":112
  * 
  *     def __dealloc__(self):
  *         if self.ndarray is None and self.img.data:             # <<<<<<<<<<<<<<
@@ -1855,7 +2241,7 @@ static void __pyx_pf_6python_6c_yolo_5Image_8__dealloc__(struct __pyx_obj_6pytho
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "python/c_yolo.pyx":93
+    /* "python/c_yolo.pyx":113
  *     def __dealloc__(self):
  *         if self.ndarray is None and self.img.data:
  *             free_image(self.img)             # <<<<<<<<<<<<<<
@@ -1864,7 +2250,7 @@ static void __pyx_pf_6python_6c_yolo_5Image_8__dealloc__(struct __pyx_obj_6pytho
  */
     free_image(__pyx_v_self->img);
 
-    /* "python/c_yolo.pyx":92
+    /* "python/c_yolo.pyx":112
  * 
  *     def __dealloc__(self):
  *         if self.ndarray is None and self.img.data:             # <<<<<<<<<<<<<<
@@ -1873,7 +2259,7 @@ static void __pyx_pf_6python_6c_yolo_5Image_8__dealloc__(struct __pyx_obj_6pytho
  */
   }
 
-  /* "python/c_yolo.pyx":91
+  /* "python/c_yolo.pyx":111
  *         self.img = img
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -1885,7 +2271,7 @@ static void __pyx_pf_6python_6c_yolo_5Image_8__dealloc__(struct __pyx_obj_6pytho
   __Pyx_RefNannyFinishContext();
 }
 
-/* "python/c_yolo.pyx":95
+/* "python/c_yolo.pyx":115
  *             free_image(self.img)
  * 
  *     cdef Image c_resize(self, int w, int h):             # <<<<<<<<<<<<<<
@@ -1904,7 +2290,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_5Image_c_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("c_resize", 0);
 
-  /* "python/c_yolo.pyx":96
+  /* "python/c_yolo.pyx":116
  * 
  *     cdef Image c_resize(self, int w, int h):
  *         cdef image resized = resize_image(self.img, w, h)             # <<<<<<<<<<<<<<
@@ -1913,30 +2299,30 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_5Image_c_
  */
   __pyx_v_resized = resize_image(__pyx_v_self->img, __pyx_v_w, __pyx_v_h);
 
-  /* "python/c_yolo.pyx":97
+  /* "python/c_yolo.pyx":117
  *     cdef Image c_resize(self, int w, int h):
  *         cdef image resized = resize_image(self.img, w, h)
  *         cdef Image res = Image()             # <<<<<<<<<<<<<<
  *         res.set_image(resized)
  *         return res
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6python_6c_yolo_Image), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 97; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6python_6c_yolo_Image), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_res = ((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "python/c_yolo.pyx":98
+  /* "python/c_yolo.pyx":118
  *         cdef image resized = resize_image(self.img, w, h)
  *         cdef Image res = Image()
  *         res.set_image(resized)             # <<<<<<<<<<<<<<
  *         return res
  * 
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_res->__pyx_vtab)->set_image(__pyx_v_res, __pyx_v_resized); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 98; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_res->__pyx_vtab)->set_image(__pyx_v_res, __pyx_v_resized); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "python/c_yolo.pyx":99
+  /* "python/c_yolo.pyx":119
  *         cdef Image res = Image()
  *         res.set_image(resized)
  *         return res             # <<<<<<<<<<<<<<
@@ -1948,7 +2334,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_5Image_c_
   __pyx_r = __pyx_v_res;
   goto __pyx_L0;
 
-  /* "python/c_yolo.pyx":95
+  /* "python/c_yolo.pyx":115
  *             free_image(self.img)
  * 
  *     cdef Image c_resize(self, int w, int h):             # <<<<<<<<<<<<<<
@@ -1968,7 +2354,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_5Image_c_
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":101
+/* "python/c_yolo.pyx":121
  *         return res
  * 
  *     def resize(self, w, h):             # <<<<<<<<<<<<<<
@@ -1977,8 +2363,8 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_5Image_c_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_11resize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_pw_6python_6c_yolo_5Image_11resize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_15resize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_pw_6python_6c_yolo_5Image_15resize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_w = 0;
   PyObject *__pyx_v_h = 0;
   int __pyx_lineno = 0;
@@ -2007,11 +2393,11 @@ static PyObject *__pyx_pw_6python_6c_yolo_5Image_11resize(PyObject *__pyx_v_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_h)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "resize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "resize") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2024,20 +2410,20 @@ static PyObject *__pyx_pw_6python_6c_yolo_5Image_11resize(PyObject *__pyx_v_self
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("python.c_yolo.Image.resize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_10resize(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self), __pyx_v_w, __pyx_v_h);
+  __pyx_r = __pyx_pf_6python_6c_yolo_5Image_14resize(((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_self), __pyx_v_w, __pyx_v_h);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6python_6c_yolo_5Image_10resize(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_w, PyObject *__pyx_v_h) {
+static PyObject *__pyx_pf_6python_6c_yolo_5Image_14resize(struct __pyx_obj_6python_6c_yolo_Image *__pyx_v_self, PyObject *__pyx_v_w, PyObject *__pyx_v_h) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -2048,7 +2434,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_10resize(struct __pyx_obj_6pyth
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("resize", 0);
 
-  /* "python/c_yolo.pyx":102
+  /* "python/c_yolo.pyx":122
  * 
  *     def resize(self, w, h):
  *         return self.c_resize(w, h)             # <<<<<<<<<<<<<<
@@ -2056,15 +2442,15 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_10resize(struct __pyx_obj_6pyth
  * cdef class YOLONet:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_w); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_v_h); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = ((PyObject *)((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_self->__pyx_vtab)->c_resize(__pyx_v_self, __pyx_t_1, __pyx_t_2)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_w); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_As_int(__pyx_v_h); if (unlikely((__pyx_t_2 == (int)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = ((PyObject *)((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_self->__pyx_vtab)->c_resize(__pyx_v_self, __pyx_t_1, __pyx_t_2)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "python/c_yolo.pyx":101
+  /* "python/c_yolo.pyx":121
  *         return res
  * 
  *     def resize(self, w, h):             # <<<<<<<<<<<<<<
@@ -2083,7 +2469,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_5Image_10resize(struct __pyx_obj_6pyth
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":110
+/* "python/c_yolo.pyx":130
  *     cdef float thresh
  * 
  *     def __cinit__(self, bytes cfgfile, bytes weightfile):             # <<<<<<<<<<<<<<
@@ -2122,11 +2508,11 @@ static int __pyx_pw_6python_6c_yolo_7YOLONet_1__cinit__(PyObject *__pyx_v_self, 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_weightfile)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2139,14 +2525,14 @@ static int __pyx_pw_6python_6c_yolo_7YOLONet_1__cinit__(PyObject *__pyx_v_self, 
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("python.c_yolo.YOLONet.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cfgfile), (&PyBytes_Type), 1, "cfgfile", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_weightfile), (&PyBytes_Type), 1, "weightfile", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_cfgfile), (&PyBytes_Type), 1, "cfgfile", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_weightfile), (&PyBytes_Type), 1, "weightfile", 1))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(((struct __pyx_obj_6python_6c_yolo_YOLONet *)__pyx_v_self), __pyx_v_cfgfile, __pyx_v_weightfile);
 
   /* function exit code */
@@ -2173,7 +2559,7 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "python/c_yolo.pyx":111
+  /* "python/c_yolo.pyx":131
  * 
  *     def __cinit__(self, bytes cfgfile, bytes weightfile):
  *         assert os.path.exists(cfgfile), 'net config file does not exist'             # <<<<<<<<<<<<<<
@@ -2182,12 +2568,12 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_exists); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_exists); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -2201,30 +2587,30 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
       }
     }
     if (!__pyx_t_3) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_cfgfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_cfgfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_cfgfile);
       __Pyx_GIVEREF(__pyx_v_cfgfile);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_cfgfile);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(!__pyx_t_5)) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_net_config_file_does_not_exist);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "python/c_yolo.pyx":112
+  /* "python/c_yolo.pyx":132
  *     def __cinit__(self, bytes cfgfile, bytes weightfile):
  *         assert os.path.exists(cfgfile), 'net config file does not exist'
  *         assert os.path.exists(weightfile), 'weight file does not exist'             # <<<<<<<<<<<<<<
@@ -2233,12 +2619,12 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_exists); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_exists); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -2252,30 +2638,30 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_weightfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_weightfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_weightfile);
       __Pyx_GIVEREF(__pyx_v_weightfile);
       PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_weightfile);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(!__pyx_t_5)) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_weight_file_does_not_exist);
-      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
 
-  /* "python/c_yolo.pyx":113
+  /* "python/c_yolo.pyx":133
  *         assert os.path.exists(cfgfile), 'net config file does not exist'
  *         assert os.path.exists(weightfile), 'weight file does not exist'
  *         self.nms = 0.4             # <<<<<<<<<<<<<<
@@ -2284,7 +2670,7 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
  */
   __pyx_v_self->nms = 0.4;
 
-  /* "python/c_yolo.pyx":114
+  /* "python/c_yolo.pyx":134
  *         assert os.path.exists(weightfile), 'weight file does not exist'
  *         self.nms = 0.4
  *         self.thresh = 0.2             # <<<<<<<<<<<<<<
@@ -2293,27 +2679,27 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
  */
   __pyx_v_self->thresh = 0.2;
 
-  /* "python/c_yolo.pyx":115
+  /* "python/c_yolo.pyx":135
  *         self.nms = 0.4
  *         self.thresh = 0.2
  *         cdef network net = parse_network_cfg(cfgfile)             # <<<<<<<<<<<<<<
  *         load_weights(&net, weightfile)
  *         set_batch_network(&net, 1)
  */
-  __pyx_t_6 = __Pyx_PyObject_AsString(__pyx_v_cfgfile); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_AsString(__pyx_v_cfgfile); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_net = parse_network_cfg(__pyx_t_6);
 
-  /* "python/c_yolo.pyx":116
+  /* "python/c_yolo.pyx":136
  *         self.thresh = 0.2
  *         cdef network net = parse_network_cfg(cfgfile)
  *         load_weights(&net, weightfile)             # <<<<<<<<<<<<<<
  *         set_batch_network(&net, 1)
  *         self.net = net
  */
-  __pyx_t_6 = __Pyx_PyObject_AsString(__pyx_v_weightfile); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_AsString(__pyx_v_weightfile); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   load_weights((&__pyx_v_net), __pyx_t_6);
 
-  /* "python/c_yolo.pyx":117
+  /* "python/c_yolo.pyx":137
  *         cdef network net = parse_network_cfg(cfgfile)
  *         load_weights(&net, weightfile)
  *         set_batch_network(&net, 1)             # <<<<<<<<<<<<<<
@@ -2322,7 +2708,7 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
  */
   set_batch_network((&__pyx_v_net), 1);
 
-  /* "python/c_yolo.pyx":118
+  /* "python/c_yolo.pyx":138
  *         load_weights(&net, weightfile)
  *         set_batch_network(&net, 1)
  *         self.net = net             # <<<<<<<<<<<<<<
@@ -2331,7 +2717,7 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
  */
   __pyx_v_self->net = __pyx_v_net;
 
-  /* "python/c_yolo.pyx":110
+  /* "python/c_yolo.pyx":130
  *     cdef float thresh
  * 
  *     def __cinit__(self, bytes cfgfile, bytes weightfile):             # <<<<<<<<<<<<<<
@@ -2354,7 +2740,7 @@ static int __pyx_pf_6python_6c_yolo_7YOLONet___cinit__(struct __pyx_obj_6python_
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":120
+/* "python/c_yolo.pyx":140
  *         self.net = net
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2377,7 +2763,7 @@ static void __pyx_pf_6python_6c_yolo_7YOLONet_2__dealloc__(struct __pyx_obj_6pyt
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "python/c_yolo.pyx":121
+  /* "python/c_yolo.pyx":141
  * 
  *     def __dealloc__(self):
  *         free_network(self.net)             # <<<<<<<<<<<<<<
@@ -2386,7 +2772,7 @@ static void __pyx_pf_6python_6c_yolo_7YOLONet_2__dealloc__(struct __pyx_obj_6pyt
  */
   free_network(__pyx_v_self->net);
 
-  /* "python/c_yolo.pyx":120
+  /* "python/c_yolo.pyx":140
  *         self.net = net
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2398,7 +2784,7 @@ static void __pyx_pf_6python_6c_yolo_7YOLONet_2__dealloc__(struct __pyx_obj_6pyt
   __Pyx_RefNannyFinishContext();
 }
 
-/* "python/c_yolo.pyx":123
+/* "python/c_yolo.pyx":143
  *         free_network(self.net)
  * 
  *     cdef Image prep_image(self, Image img):             # <<<<<<<<<<<<<<
@@ -2422,7 +2808,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("prep_image", 0);
 
-  /* "python/c_yolo.pyx":124
+  /* "python/c_yolo.pyx":144
  * 
  *     cdef Image prep_image(self, Image img):
  *         cdef int w = self.net.w             # <<<<<<<<<<<<<<
@@ -2432,7 +2818,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
   __pyx_t_1 = __pyx_v_self->net.w;
   __pyx_v_w = __pyx_t_1;
 
-  /* "python/c_yolo.pyx":125
+  /* "python/c_yolo.pyx":145
  *     cdef Image prep_image(self, Image img):
  *         cdef int w = self.net.w
  *         cdef int h = self.net.h             # <<<<<<<<<<<<<<
@@ -2442,14 +2828,14 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
   __pyx_t_1 = __pyx_v_self->net.h;
   __pyx_v_h = __pyx_t_1;
 
-  /* "python/c_yolo.pyx":127
+  /* "python/c_yolo.pyx":147
  *         cdef int h = self.net.h
  * 
  *         if img.width() == w and img.height() == h:             # <<<<<<<<<<<<<<
  *             return img
  *         else:
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_img), __pyx_n_s_width); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_img), __pyx_n_s_width); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2462,26 +2848,26 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
     }
   }
   if (__pyx_t_5) {
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   } else {
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_w); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_w); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyObject_RichCompare(__pyx_t_3, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_6) {
   } else {
     __pyx_t_2 = __pyx_t_6;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_img), __pyx_n_s_height); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_img), __pyx_n_s_height); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2494,25 +2880,25 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_h); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_h); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyObject_RichCompare(__pyx_t_5, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyObject_RichCompare(__pyx_t_5, __pyx_t_4, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_2 = __pyx_t_6;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "python/c_yolo.pyx":128
+    /* "python/c_yolo.pyx":148
  * 
  *         if img.width() == w and img.height() == h:
  *             return img             # <<<<<<<<<<<<<<
@@ -2524,7 +2910,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
     __pyx_r = __pyx_v_img;
     goto __pyx_L0;
 
-    /* "python/c_yolo.pyx":127
+    /* "python/c_yolo.pyx":147
  *         cdef int h = self.net.h
  * 
  *         if img.width() == w and img.height() == h:             # <<<<<<<<<<<<<<
@@ -2533,7 +2919,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
  */
   }
 
-  /* "python/c_yolo.pyx":130
+  /* "python/c_yolo.pyx":150
  *             return img
  *         else:
  *             return img.c_resize(w, h)             # <<<<<<<<<<<<<<
@@ -2542,14 +2928,14 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
  */
   /*else*/ {
     __Pyx_XDECREF(((PyObject *)__pyx_r));
-    __pyx_t_3 = ((PyObject *)((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_img->__pyx_vtab)->c_resize(__pyx_v_img, __pyx_v_w, __pyx_v_h)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = ((PyObject *)((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_img->__pyx_vtab)->c_resize(__pyx_v_img, __pyx_v_w, __pyx_v_h)); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_r = ((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
   }
 
-  /* "python/c_yolo.pyx":123
+  /* "python/c_yolo.pyx":143
  *         free_network(self.net)
  * 
  *     cdef Image prep_image(self, Image img):             # <<<<<<<<<<<<<<
@@ -2570,7 +2956,7 @@ static struct __pyx_obj_6python_6c_yolo_Image *__pyx_f_6python_6c_yolo_7YOLONet_
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":132
+/* "python/c_yolo.pyx":152
  *             return img.c_resize(w, h)
  * 
  *     def predict(self, thing):             # <<<<<<<<<<<<<<
@@ -2605,7 +2991,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("predict", 0);
 
-  /* "python/c_yolo.pyx":133
+  /* "python/c_yolo.pyx":153
  * 
  *     def predict(self, thing):
  *         if isinstance(thing, Image):             # <<<<<<<<<<<<<<
@@ -2616,7 +3002,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "python/c_yolo.pyx":134
+    /* "python/c_yolo.pyx":154
  *     def predict(self, thing):
  *         if isinstance(thing, Image):
  *             return self.predict_image(thing)             # <<<<<<<<<<<<<<
@@ -2624,7 +3010,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
  *             return self.predict_ndarray(thing)
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_predict_image); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_predict_image); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2637,16 +3023,16 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_thing); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_thing); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
       __Pyx_INCREF(__pyx_v_thing);
       __Pyx_GIVEREF(__pyx_v_thing);
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_v_thing);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
@@ -2655,7 +3041,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "python/c_yolo.pyx":133
+    /* "python/c_yolo.pyx":153
  * 
  *     def predict(self, thing):
  *         if isinstance(thing, Image):             # <<<<<<<<<<<<<<
@@ -2664,18 +3050,18 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
  */
   }
 
-  /* "python/c_yolo.pyx":135
+  /* "python/c_yolo.pyx":155
  *         if isinstance(thing, Image):
  *             return self.predict_image(thing)
  *         elif hasattr(thing, 'dtype'):             # <<<<<<<<<<<<<<
  *             return self.predict_ndarray(thing)
  * 
  */
-  __pyx_t_2 = PyObject_HasAttr(__pyx_v_thing, __pyx_n_s_dtype); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyObject_HasAttr(__pyx_v_thing, __pyx_n_s_dtype); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "python/c_yolo.pyx":136
+    /* "python/c_yolo.pyx":156
  *             return self.predict_image(thing)
  *         elif hasattr(thing, 'dtype'):
  *             return self.predict_ndarray(thing)             # <<<<<<<<<<<<<<
@@ -2683,7 +3069,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
  *     def predict_ndarray(self, np.ndarray arr):
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_predict_ndarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_predict_ndarray); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_6 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2696,16 +3082,16 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
       }
     }
     if (!__pyx_t_6) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_thing); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_thing); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
     } else {
-      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
       __Pyx_INCREF(__pyx_v_thing);
       __Pyx_GIVEREF(__pyx_v_thing);
       PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_thing);
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
@@ -2714,7 +3100,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "python/c_yolo.pyx":135
+    /* "python/c_yolo.pyx":155
  *         if isinstance(thing, Image):
  *             return self.predict_image(thing)
  *         elif hasattr(thing, 'dtype'):             # <<<<<<<<<<<<<<
@@ -2723,7 +3109,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
  */
   }
 
-  /* "python/c_yolo.pyx":132
+  /* "python/c_yolo.pyx":152
  *             return img.c_resize(w, h)
  * 
  *     def predict(self, thing):             # <<<<<<<<<<<<<<
@@ -2747,7 +3133,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_4predict(struct __pyx_obj_6py
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":138
+/* "python/c_yolo.pyx":158
  *             return self.predict_ndarray(thing)
  * 
  *     def predict_ndarray(self, np.ndarray arr):             # <<<<<<<<<<<<<<
@@ -2764,7 +3150,7 @@ static PyObject *__pyx_pw_6python_6c_yolo_7YOLONet_7predict_ndarray(PyObject *__
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("predict_ndarray (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_6python_6c_yolo_7YOLONet_6predict_ndarray(((struct __pyx_obj_6python_6c_yolo_YOLONet *)__pyx_v_self), ((PyArrayObject *)__pyx_v_arr));
 
   /* function exit code */
@@ -2789,30 +3175,30 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_6predict_ndarray(struct __pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("predict_ndarray", 0);
 
-  /* "python/c_yolo.pyx":139
+  /* "python/c_yolo.pyx":159
  * 
  *     def predict_ndarray(self, np.ndarray arr):
  *         cdef Image img = Image()             # <<<<<<<<<<<<<<
  *         img.c_set_ndarray(arr)
  *         return self.predict_image(img)
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6python_6c_yolo_Image), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_6python_6c_yolo_Image), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 159; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_img = ((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "python/c_yolo.pyx":140
+  /* "python/c_yolo.pyx":160
  *     def predict_ndarray(self, np.ndarray arr):
  *         cdef Image img = Image()
  *         img.c_set_ndarray(arr)             # <<<<<<<<<<<<<<
  *         return self.predict_image(img)
  * 
  */
-  __pyx_t_1 = ((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_img->__pyx_vtab)->c_set_ndarray(__pyx_v_img, __pyx_v_arr); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_img->__pyx_vtab)->c_set_ndarray(__pyx_v_img, __pyx_v_arr); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "python/c_yolo.pyx":141
+  /* "python/c_yolo.pyx":161
  *         cdef Image img = Image()
  *         img.c_set_ndarray(arr)
  *         return self.predict_image(img)             # <<<<<<<<<<<<<<
@@ -2820,7 +3206,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_6predict_ndarray(struct __pyx
  *     def predict_image(self, Image inp):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_predict_image); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_predict_image); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2833,16 +3219,16 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_6predict_ndarray(struct __pyx
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, ((PyObject *)__pyx_v_img)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, ((PyObject *)__pyx_v_img)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(((PyObject *)__pyx_v_img));
     __Pyx_GIVEREF(((PyObject *)__pyx_v_img));
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, ((PyObject *)__pyx_v_img));
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -2851,7 +3237,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_6predict_ndarray(struct __pyx
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "python/c_yolo.pyx":138
+  /* "python/c_yolo.pyx":158
  *             return self.predict_ndarray(thing)
  * 
  *     def predict_ndarray(self, np.ndarray arr):             # <<<<<<<<<<<<<<
@@ -2874,7 +3260,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_6predict_ndarray(struct __pyx
   return __pyx_r;
 }
 
-/* "python/c_yolo.pyx":143
+/* "python/c_yolo.pyx":163
  *         return self.predict_image(img)
  * 
  *     def predict_image(self, Image inp):             # <<<<<<<<<<<<<<
@@ -2891,7 +3277,7 @@ static PyObject *__pyx_pw_6python_6c_yolo_7YOLONet_9predict_image(PyObject *__py
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("predict_image (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_inp), __pyx_ptype_6python_6c_yolo_Image, 1, "inp", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_inp), __pyx_ptype_6python_6c_yolo_Image, 1, "inp", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(((struct __pyx_obj_6python_6c_yolo_YOLONet *)__pyx_v_self), ((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_v_inp));
 
   /* function exit code */
@@ -2942,19 +3328,19 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("predict_image", 0);
 
-  /* "python/c_yolo.pyx":145
+  /* "python/c_yolo.pyx":165
  *     def predict_image(self, Image inp):
  *         cdef layer l
  *         cdef Image prepped_pyimage = self.prep_image(inp)             # <<<<<<<<<<<<<<
  *         cdef image prepped_image = prepped_pyimage.get_image()
  *         cdef int num_detections
  */
-  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_6python_6c_yolo_YOLONet *)__pyx_v_self->__pyx_vtab)->prep_image(__pyx_v_self, __pyx_v_inp)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = ((PyObject *)((struct __pyx_vtabstruct_6python_6c_yolo_YOLONet *)__pyx_v_self->__pyx_vtab)->prep_image(__pyx_v_self, __pyx_v_inp)); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_prepped_pyimage = ((struct __pyx_obj_6python_6c_yolo_Image *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "python/c_yolo.pyx":146
+  /* "python/c_yolo.pyx":166
  *         cdef layer l
  *         cdef Image prepped_pyimage = self.prep_image(inp)
  *         cdef image prepped_image = prepped_pyimage.get_image()             # <<<<<<<<<<<<<<
@@ -2963,7 +3349,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
   __pyx_v_prepped_image = ((struct __pyx_vtabstruct_6python_6c_yolo_Image *)__pyx_v_prepped_pyimage->__pyx_vtab)->get_image(__pyx_v_prepped_pyimage);
 
-  /* "python/c_yolo.pyx":152
+  /* "python/c_yolo.pyx":172
  *         cdef box *b
  *         cdef int classes
  *         try:             # <<<<<<<<<<<<<<
@@ -2972,7 +3358,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
   /*try:*/ {
 
-    /* "python/c_yolo.pyx":153
+    /* "python/c_yolo.pyx":173
  *         cdef int classes
  *         try:
  *             l = self.net.layers[self.net.n-1]             # <<<<<<<<<<<<<<
@@ -2981,7 +3367,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
     __pyx_v_l = (__pyx_v_self->net.layers[(__pyx_v_self->net.n - 1)]);
 
-    /* "python/c_yolo.pyx":154
+    /* "python/c_yolo.pyx":174
  *         try:
  *             l = self.net.layers[self.net.n-1]
  *             classes = l.classes             # <<<<<<<<<<<<<<
@@ -2991,7 +3377,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
     __pyx_t_2 = __pyx_v_l.classes;
     __pyx_v_classes = __pyx_t_2;
 
-    /* "python/c_yolo.pyx":155
+    /* "python/c_yolo.pyx":175
  *             l = self.net.layers[self.net.n-1]
  *             classes = l.classes
  *             num_detections = l.side*l.side*l.n             # <<<<<<<<<<<<<<
@@ -3000,7 +3386,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
     __pyx_v_num_detections = ((__pyx_v_l.side * __pyx_v_l.side) * __pyx_v_l.n);
 
-    /* "python/c_yolo.pyx":157
+    /* "python/c_yolo.pyx":177
  *             num_detections = l.side*l.side*l.n
  * 
  *             probs = <float **> calloc(num_detections, sizeof(float *))             # <<<<<<<<<<<<<<
@@ -3009,7 +3395,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
     __pyx_v_probs = ((float **)calloc(__pyx_v_num_detections, (sizeof(float *))));
 
-    /* "python/c_yolo.pyx":158
+    /* "python/c_yolo.pyx":178
  * 
  *             probs = <float **> calloc(num_detections, sizeof(float *))
  *             for j in range(num_detections):             # <<<<<<<<<<<<<<
@@ -3020,7 +3406,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
     for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
       __pyx_v_j = __pyx_t_3;
 
-      /* "python/c_yolo.pyx":159
+      /* "python/c_yolo.pyx":179
  *             probs = <float **> calloc(num_detections, sizeof(float *))
  *             for j in range(num_detections):
  *                 probs[j] = <float *> calloc(l.classes, sizeof(float *))             # <<<<<<<<<<<<<<
@@ -3030,7 +3416,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
       (__pyx_v_probs[__pyx_v_j]) = ((float *)calloc(__pyx_v_l.classes, (sizeof(float *))));
     }
 
-    /* "python/c_yolo.pyx":160
+    /* "python/c_yolo.pyx":180
  *             for j in range(num_detections):
  *                 probs[j] = <float *> calloc(l.classes, sizeof(float *))
  *             boxes = <box *> calloc(num_detections, sizeof(box))             # <<<<<<<<<<<<<<
@@ -3039,7 +3425,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
     __pyx_v_boxes = ((box *)calloc(__pyx_v_num_detections, (sizeof(box))));
 
-    /* "python/c_yolo.pyx":162
+    /* "python/c_yolo.pyx":182
  *             boxes = <box *> calloc(num_detections, sizeof(box))
  * 
  *             predictions = network_predict(self.net, prepped_image.data)             # <<<<<<<<<<<<<<
@@ -3048,7 +3434,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
     __pyx_v_predictions = network_predict(__pyx_v_self->net, __pyx_v_prepped_image.data);
 
-    /* "python/c_yolo.pyx":163
+    /* "python/c_yolo.pyx":183
  * 
  *             predictions = network_predict(self.net, prepped_image.data)
  *             convert_yolo_detections(             # <<<<<<<<<<<<<<
@@ -3057,7 +3443,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
     convert_yolo_detections(__pyx_v_predictions, __pyx_v_l.classes, __pyx_v_l.n, __pyx_v_l.sqrt, __pyx_v_l.side, __pyx_v_self->net.w, __pyx_v_self->net.h, __pyx_v_self->thresh, __pyx_v_probs, __pyx_v_boxes, 0);
 
-    /* "python/c_yolo.pyx":168
+    /* "python/c_yolo.pyx":188
  *                     self.net.w, self.net.h,
  *                     self.thresh, probs, boxes, 0)
  *             if self.nms > 0:             # <<<<<<<<<<<<<<
@@ -3067,7 +3453,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
     __pyx_t_4 = ((__pyx_v_self->nms > 0.0) != 0);
     if (__pyx_t_4) {
 
-      /* "python/c_yolo.pyx":169
+      /* "python/c_yolo.pyx":189
  *                     self.thresh, probs, boxes, 0)
  *             if self.nms > 0:
  *                 do_nms(boxes, probs, num_detections, l.classes, self.nms)             # <<<<<<<<<<<<<<
@@ -3076,7 +3462,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
       do_nms(__pyx_v_boxes, __pyx_v_probs, __pyx_v_num_detections, __pyx_v_l.classes, __pyx_v_self->nms);
 
-      /* "python/c_yolo.pyx":168
+      /* "python/c_yolo.pyx":188
  *                     self.net.w, self.net.h,
  *                     self.thresh, probs, boxes, 0)
  *             if self.nms > 0:             # <<<<<<<<<<<<<<
@@ -3085,19 +3471,19 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
     }
 
-    /* "python/c_yolo.pyx":171
+    /* "python/c_yolo.pyx":191
  *                 do_nms(boxes, probs, num_detections, l.classes, self.nms)
  * 
  *             res = []             # <<<<<<<<<<<<<<
  *             for i in range(num_detections):
  *                 b = &boxes[i]
  */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_res = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "python/c_yolo.pyx":172
+    /* "python/c_yolo.pyx":192
  * 
  *             res = []
  *             for i in range(num_detections):             # <<<<<<<<<<<<<<
@@ -3108,7 +3494,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
     for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
       __pyx_v_i = __pyx_t_3;
 
-      /* "python/c_yolo.pyx":173
+      /* "python/c_yolo.pyx":193
  *             res = []
  *             for i in range(num_detections):
  *                 b = &boxes[i]             # <<<<<<<<<<<<<<
@@ -3117,32 +3503,32 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
       __pyx_v_b = (&(__pyx_v_boxes[__pyx_v_i]));
 
-      /* "python/c_yolo.pyx":174
+      /* "python/c_yolo.pyx":194
  *             for i in range(num_detections):
  *                 b = &boxes[i]
  *                 res.append((b.x, b.y, b.w, b.h, [probs[i][j] for j in range(l.classes)]))             # <<<<<<<<<<<<<<
  *             return res
  *         finally:
  */
-      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_b->x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_1 = PyFloat_FromDouble(__pyx_v_b->x); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_b->y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_5 = PyFloat_FromDouble(__pyx_v_b->y); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = PyFloat_FromDouble(__pyx_v_b->w); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_6 = PyFloat_FromDouble(__pyx_v_b->w); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = PyFloat_FromDouble(__pyx_v_b->h); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_7 = PyFloat_FromDouble(__pyx_v_b->h); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_8 = PyList_New(0); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_8 = PyList_New(0); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_9 = __pyx_v_l.classes;
       for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
         __pyx_v_j = __pyx_t_10;
-        __pyx_t_11 = PyFloat_FromDouble(((__pyx_v_probs[__pyx_v_i])[__pyx_v_j])); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+        __pyx_t_11 = PyFloat_FromDouble(((__pyx_v_probs[__pyx_v_i])[__pyx_v_j])); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
         __Pyx_GOTREF(__pyx_t_11);
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_8, (PyObject*)__pyx_t_11))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_8, (PyObject*)__pyx_t_11))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
-      __pyx_t_11 = PyTuple_New(5); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_11 = PyTuple_New(5); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_GIVEREF(__pyx_t_1);
       PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_1);
@@ -3159,11 +3545,11 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
       __pyx_t_6 = 0;
       __pyx_t_7 = 0;
       __pyx_t_8 = 0;
-      __pyx_t_12 = __Pyx_PyList_Append(__pyx_v_res, __pyx_t_11); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 174; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_12 = __Pyx_PyList_Append(__pyx_v_res, __pyx_t_11); if (unlikely(__pyx_t_12 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 194; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     }
 
-    /* "python/c_yolo.pyx":175
+    /* "python/c_yolo.pyx":195
  *                 b = &boxes[i]
  *                 res.append((b.x, b.y, b.w, b.h, [probs[i][j] for j in range(l.classes)]))
  *             return res             # <<<<<<<<<<<<<<
@@ -3176,7 +3562,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
     goto __pyx_L3_return;
   }
 
-  /* "python/c_yolo.pyx":177
+  /* "python/c_yolo.pyx":197
  *             return res
  *         finally:
  *             if probs:             # <<<<<<<<<<<<<<
@@ -3206,7 +3592,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
         __pyx_t_4 = (__pyx_v_probs != 0);
         if (__pyx_t_4) {
 
-          /* "python/c_yolo.pyx":178
+          /* "python/c_yolo.pyx":198
  *         finally:
  *             if probs:
  *                 for i in range(num_detections):             # <<<<<<<<<<<<<<
@@ -3217,7 +3603,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
           for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
             __pyx_v_i = __pyx_t_10;
 
-            /* "python/c_yolo.pyx":179
+            /* "python/c_yolo.pyx":199
  *             if probs:
  *                 for i in range(num_detections):
  *                     free(probs[i])             # <<<<<<<<<<<<<<
@@ -3227,7 +3613,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
             free((__pyx_v_probs[__pyx_v_i]));
           }
 
-          /* "python/c_yolo.pyx":180
+          /* "python/c_yolo.pyx":200
  *                 for i in range(num_detections):
  *                     free(probs[i])
  *                 free(probs)             # <<<<<<<<<<<<<<
@@ -3236,7 +3622,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
           free(__pyx_v_probs);
 
-          /* "python/c_yolo.pyx":177
+          /* "python/c_yolo.pyx":197
  *             return res
  *         finally:
  *             if probs:             # <<<<<<<<<<<<<<
@@ -3245,7 +3631,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
         }
 
-        /* "python/c_yolo.pyx":181
+        /* "python/c_yolo.pyx":201
  *                     free(probs[i])
  *                 free(probs)
  *             if boxes:             # <<<<<<<<<<<<<<
@@ -3254,14 +3640,14 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
         __pyx_t_4 = (__pyx_v_boxes != 0);
         if (__pyx_t_4) {
 
-          /* "python/c_yolo.pyx":182
+          /* "python/c_yolo.pyx":202
  *                 free(probs)
  *             if boxes:
  *                 free(boxes)             # <<<<<<<<<<<<<<
  */
           free(__pyx_v_boxes);
 
-          /* "python/c_yolo.pyx":181
+          /* "python/c_yolo.pyx":201
  *                     free(probs[i])
  *                 free(probs)
  *             if boxes:             # <<<<<<<<<<<<<<
@@ -3287,7 +3673,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
       __pyx_t_19 = __pyx_r;
       __pyx_r = 0;
 
-      /* "python/c_yolo.pyx":177
+      /* "python/c_yolo.pyx":197
  *             return res
  *         finally:
  *             if probs:             # <<<<<<<<<<<<<<
@@ -3297,7 +3683,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
       __pyx_t_4 = (__pyx_v_probs != 0);
       if (__pyx_t_4) {
 
-        /* "python/c_yolo.pyx":178
+        /* "python/c_yolo.pyx":198
  *         finally:
  *             if probs:
  *                 for i in range(num_detections):             # <<<<<<<<<<<<<<
@@ -3308,7 +3694,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
         for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_3; __pyx_t_2+=1) {
           __pyx_v_i = __pyx_t_2;
 
-          /* "python/c_yolo.pyx":179
+          /* "python/c_yolo.pyx":199
  *             if probs:
  *                 for i in range(num_detections):
  *                     free(probs[i])             # <<<<<<<<<<<<<<
@@ -3318,7 +3704,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
           free((__pyx_v_probs[__pyx_v_i]));
         }
 
-        /* "python/c_yolo.pyx":180
+        /* "python/c_yolo.pyx":200
  *                 for i in range(num_detections):
  *                     free(probs[i])
  *                 free(probs)             # <<<<<<<<<<<<<<
@@ -3327,7 +3713,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
         free(__pyx_v_probs);
 
-        /* "python/c_yolo.pyx":177
+        /* "python/c_yolo.pyx":197
  *             return res
  *         finally:
  *             if probs:             # <<<<<<<<<<<<<<
@@ -3336,7 +3722,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
  */
       }
 
-      /* "python/c_yolo.pyx":181
+      /* "python/c_yolo.pyx":201
  *                     free(probs[i])
  *                 free(probs)
  *             if boxes:             # <<<<<<<<<<<<<<
@@ -3345,14 +3731,14 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
       __pyx_t_4 = (__pyx_v_boxes != 0);
       if (__pyx_t_4) {
 
-        /* "python/c_yolo.pyx":182
+        /* "python/c_yolo.pyx":202
  *                 free(probs)
  *             if boxes:
  *                 free(boxes)             # <<<<<<<<<<<<<<
  */
         free(__pyx_v_boxes);
 
-        /* "python/c_yolo.pyx":181
+        /* "python/c_yolo.pyx":201
  *                     free(probs[i])
  *                 free(probs)
  *             if boxes:             # <<<<<<<<<<<<<<
@@ -3365,7 +3751,7 @@ static PyObject *__pyx_pf_6python_6c_yolo_7YOLONet_8predict_image(struct __pyx_o
     }
   }
 
-  /* "python/c_yolo.pyx":143
+  /* "python/c_yolo.pyx":163
  *         return self.predict_image(img)
  * 
  *     def predict_image(self, Image inp):             # <<<<<<<<<<<<<<
@@ -5562,7 +5948,7 @@ static void __pyx_tp_dealloc_6python_6c_yolo_Image(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_6python_6c_yolo_5Image_9__dealloc__(o);
+    __pyx_pw_6python_6c_yolo_5Image_13__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
@@ -5589,11 +5975,13 @@ static int __pyx_tp_clear_6python_6c_yolo_Image(PyObject *o) {
 }
 
 static PyMethodDef __pyx_methods_6python_6c_yolo_Image[] = {
-  {"width", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_1width, METH_NOARGS, 0},
-  {"height", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_3height, METH_NOARGS, 0},
-  {"channels", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_5channels, METH_NOARGS, 0},
-  {"set_ndarray", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_7set_ndarray, METH_O, 0},
-  {"resize", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_11resize, METH_VARARGS|METH_KEYWORDS, 0},
+  {"to_ndarray", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_1to_ndarray, METH_NOARGS, 0},
+  {"from_ndarray", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_3from_ndarray, METH_VARARGS|METH_KEYWORDS, 0},
+  {"width", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_5width, METH_NOARGS, 0},
+  {"height", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_7height, METH_NOARGS, 0},
+  {"channels", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_9channels, METH_NOARGS, 0},
+  {"set_ndarray", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_11set_ndarray, METH_O, 0},
+  {"resize", (PyCFunction)__pyx_pw_6python_6c_yolo_5Image_15resize, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -5778,18 +6166,23 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_n_s_C, __pyx_k_C, sizeof(__pyx_k_C), 0, 0, 1, 1},
   {&__pyx_kp_u_Format_string_allocated_too_shor, __pyx_k_Format_string_allocated_too_shor, sizeof(__pyx_k_Format_string_allocated_too_shor), 0, 1, 0, 0},
   {&__pyx_kp_u_Format_string_allocated_too_shor_2, __pyx_k_Format_string_allocated_too_shor_2, sizeof(__pyx_k_Format_string_allocated_too_shor_2), 0, 1, 0, 0},
   {&__pyx_kp_u_Non_native_byte_order_not_suppor, __pyx_k_Non_native_byte_order_not_suppor, sizeof(__pyx_k_Non_native_byte_order_not_suppor), 0, 1, 0, 0},
   {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
+  {&__pyx_n_s_arr, __pyx_k_arr, sizeof(__pyx_k_arr), 0, 0, 1, 1},
   {&__pyx_n_s_astype, __pyx_k_astype, sizeof(__pyx_k_astype), 0, 0, 1, 1},
   {&__pyx_n_s_cfgfile, __pyx_k_cfgfile, sizeof(__pyx_k_cfgfile), 0, 0, 1, 1},
   {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
+  {&__pyx_n_s_empty, __pyx_k_empty, sizeof(__pyx_k_empty), 0, 0, 1, 1},
   {&__pyx_n_s_exists, __pyx_k_exists, sizeof(__pyx_k_exists), 0, 0, 1, 1},
   {&__pyx_n_s_float32, __pyx_k_float32, sizeof(__pyx_k_float32), 0, 0, 1, 1},
+  {&__pyx_n_s_from_ndarray, __pyx_k_from_ndarray, sizeof(__pyx_k_from_ndarray), 0, 0, 1, 1},
   {&__pyx_n_s_h, __pyx_k_h, sizeof(__pyx_k_h), 0, 0, 1, 1},
   {&__pyx_n_s_height, __pyx_k_height, sizeof(__pyx_k_height), 0, 0, 1, 1},
+  {&__pyx_kp_s_home_bob_darknet_python_c_yolo, __pyx_k_home_bob_darknet_python_c_yolo, sizeof(__pyx_k_home_bob_darknet_python_c_yolo), 0, 0, 1, 0},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_kp_u_ndarray_is_not_C_contiguous, __pyx_k_ndarray_is_not_C_contiguous, sizeof(__pyx_k_ndarray_is_not_C_contiguous), 0, 1, 0, 0},
@@ -5797,12 +6190,17 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_net_config_file_does_not_exist, __pyx_k_net_config_file_does_not_exist, sizeof(__pyx_k_net_config_file_does_not_exist), 0, 0, 1, 0},
   {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
   {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
+  {&__pyx_n_s_order, __pyx_k_order, sizeof(__pyx_k_order), 0, 0, 1, 1},
   {&__pyx_n_s_os, __pyx_k_os, sizeof(__pyx_k_os), 0, 0, 1, 1},
   {&__pyx_n_s_path, __pyx_k_path, sizeof(__pyx_k_path), 0, 0, 1, 1},
   {&__pyx_n_s_predict_image, __pyx_k_predict_image, sizeof(__pyx_k_predict_image), 0, 0, 1, 1},
   {&__pyx_n_s_predict_ndarray, __pyx_k_predict_ndarray, sizeof(__pyx_k_predict_ndarray), 0, 0, 1, 1},
+  {&__pyx_n_s_python_c_yolo, __pyx_k_python_c_yolo, sizeof(__pyx_k_python_c_yolo), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
+  {&__pyx_n_s_res, __pyx_k_res, sizeof(__pyx_k_res), 0, 0, 1, 1},
+  {&__pyx_n_s_set_ndarray, __pyx_k_set_ndarray, sizeof(__pyx_k_set_ndarray), 0, 0, 1, 1},
+  {&__pyx_n_s_staticmethod, __pyx_k_staticmethod, sizeof(__pyx_k_staticmethod), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_kp_u_unknown_dtype_code_in_numpy_pxd, __pyx_k_unknown_dtype_code_in_numpy_pxd, sizeof(__pyx_k_unknown_dtype_code_in_numpy_pxd), 0, 1, 0, 0},
   {&__pyx_n_s_w, __pyx_k_w, sizeof(__pyx_k_w), 0, 0, 1, 1},
@@ -5812,7 +6210,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 799; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   return 0;
@@ -5889,6 +6288,18 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_Format_string_allocated_too_shor_2); if (unlikely(!__pyx_tuple__6)) {__pyx_filename = __pyx_f[1]; __pyx_lineno = 823; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
+
+  /* "python/c_yolo.pyx":78
+ * 
+ *     @staticmethod
+ *     def from_ndarray(arr):             # <<<<<<<<<<<<<<
+ *         res = Image()
+ *         res.set_ndarray(arr)
+ */
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_arr, __pyx_n_s_res); if (unlikely(!__pyx_tuple__7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_bob_darknet_python_c_yolo, __pyx_n_s_from_ndarray, 78, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5912,6 +6323,7 @@ PyMODINIT_FUNC PyInit_c_yolo(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5994,17 +6406,17 @@ PyMODINIT_FUNC PyInit_c_yolo(void)
   __pyx_vtable_6python_6c_yolo_Image.c_set_ndarray = (PyObject *(*)(struct __pyx_obj_6python_6c_yolo_Image *, PyArrayObject *))__pyx_f_6python_6c_yolo_5Image_c_set_ndarray;
   __pyx_vtable_6python_6c_yolo_Image.set_image = (PyObject *(*)(struct __pyx_obj_6python_6c_yolo_Image *, image))__pyx_f_6python_6c_yolo_5Image_set_image;
   __pyx_vtable_6python_6c_yolo_Image.c_resize = (struct __pyx_obj_6python_6c_yolo_Image *(*)(struct __pyx_obj_6python_6c_yolo_Image *, int, int))__pyx_f_6python_6c_yolo_5Image_c_resize;
-  if (PyType_Ready(&__pyx_type_6python_6c_yolo_Image) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_6python_6c_yolo_Image) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_6python_6c_yolo_Image.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_6python_6c_yolo_Image.tp_dict, __pyx_vtabptr_6python_6c_yolo_Image) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyObject_SetAttrString(__pyx_m, "Image", (PyObject *)&__pyx_type_6python_6c_yolo_Image) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_SetVtable(__pyx_type_6python_6c_yolo_Image.tp_dict, __pyx_vtabptr_6python_6c_yolo_Image) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "Image", (PyObject *)&__pyx_type_6python_6c_yolo_Image) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_6python_6c_yolo_Image = &__pyx_type_6python_6c_yolo_Image;
   __pyx_vtabptr_6python_6c_yolo_YOLONet = &__pyx_vtable_6python_6c_yolo_YOLONet;
   __pyx_vtable_6python_6c_yolo_YOLONet.prep_image = (struct __pyx_obj_6python_6c_yolo_Image *(*)(struct __pyx_obj_6python_6c_yolo_YOLONet *, struct __pyx_obj_6python_6c_yolo_Image *))__pyx_f_6python_6c_yolo_7YOLONet_prep_image;
-  if (PyType_Ready(&__pyx_type_6python_6c_yolo_YOLONet) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_6python_6c_yolo_YOLONet) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_6python_6c_yolo_YOLONet.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_6python_6c_yolo_YOLONet.tp_dict, __pyx_vtabptr_6python_6c_yolo_YOLONet) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (PyObject_SetAttrString(__pyx_m, "YOLONet", (PyObject *)&__pyx_type_6python_6c_yolo_YOLONet) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_SetVtable(__pyx_type_6python_6c_yolo_YOLONet.tp_dict, __pyx_vtabptr_6python_6c_yolo_YOLONet) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "YOLONet", (PyObject *)&__pyx_type_6python_6c_yolo_YOLONet) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_6python_6c_yolo_YOLONet = &__pyx_type_6python_6c_yolo_YOLONet;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -6029,29 +6441,87 @@ PyMODINIT_FUNC PyInit_c_yolo(void)
   /* "python/c_yolo.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
- * 
+ * from cython cimport view
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "python/c_yolo.pyx":5
- * 
+  /* "python/c_yolo.pyx":7
  * from libc.stdlib cimport free, calloc
+ * from libc.string cimport memcpy
  * import os             # <<<<<<<<<<<<<<
  * 
  * cdef extern from "../src/layer.h":
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_os, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_os, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_os, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_os, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "python/c_yolo.pyx":78
+ * 
+ *     @staticmethod
+ *     def from_ndarray(arr):             # <<<<<<<<<<<<<<
+ *         res = Image()
+ *         res.set_ndarray(arr)
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_6python_6c_yolo_5Image_3from_ndarray, NULL, __pyx_n_s_python_c_yolo); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+
+  /* "python/c_yolo.pyx":77
+ *             return res
+ * 
+ *     @staticmethod             # <<<<<<<<<<<<<<
+ *     def from_ndarray(arr):
+ *         res = Image()
+ */
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6python_6c_yolo_Image->tp_dict, __pyx_n_s_from_ndarray, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  PyType_Modified(__pyx_ptype_6python_6c_yolo_Image);
+
+  /* "python/c_yolo.pyx":78
+ * 
+ *     @staticmethod
+ *     def from_ndarray(arr):             # <<<<<<<<<<<<<<
+ *         res = Image()
+ *         res.set_ndarray(arr)
+ */
+  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_6python_6c_yolo_Image, __pyx_n_s_from_ndarray); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+
+  /* "python/c_yolo.pyx":77
+ *             return res
+ * 
+ *     @staticmethod             # <<<<<<<<<<<<<<
+ *     def from_ndarray(arr):
+ *         res = Image()
+ */
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 77; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_6python_6c_yolo_Image->tp_dict, __pyx_n_s_from_ndarray, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 78; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  PyType_Modified(__pyx_ptype_6python_6c_yolo_Image);
 
   /* "python/c_yolo.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
- * 
+ * from cython cimport view
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -6071,6 +6541,7 @@ PyMODINIT_FUNC PyInit_c_yolo(void)
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init python.c_yolo", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -6154,59 +6625,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg
 }
 #endif
 
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
-    PyObject *self, *result;
-    PyCFunction cfunc;
-    cfunc = PyCFunction_GET_FUNCTION(func);
-    self = PyCFunction_GET_SELF(func);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = cfunc(self, arg);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
-
-#if CYTHON_COMPILING_IN_CPYTHON
-static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
-    PyObject *result;
-    PyObject *args = PyTuple_New(1);
-    if (unlikely(!args)) return NULL;
-    Py_INCREF(arg);
-    PyTuple_SET_ITEM(args, 0, arg);
-    result = __Pyx_PyObject_Call(func, args, NULL);
-    Py_DECREF(args);
-    return result;
-}
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
-#ifdef __Pyx_CyFunction_USED
-    if (likely(PyCFunction_Check(func) || PyObject_TypeCheck(func, __pyx_CyFunctionType))) {
-#else
-    if (likely(PyCFunction_Check(func))) {
-#endif
-        if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
-            return __Pyx_PyObject_CallMethO(func, arg);
-        }
-    }
-    return __Pyx__PyObject_CallOneArg(func, arg);
-}
-#else
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
-    PyObject *result;
-    PyObject *args = PyTuple_Pack(1, arg);
-    if (unlikely(!args)) return NULL;
-    result = __Pyx_PyObject_Call(func, args, NULL);
-    Py_DECREF(args);
-    return result;
-}
-#endif
-
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     if (unlikely(!type)) {
         PyErr_SetString(PyExc_SystemError, "Missing type object");
@@ -6217,31 +6635,6 @@ static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError, "Cannot convert %.200s to %.200s",
                  Py_TYPE(obj)->tp_name, type->tp_name);
     return 0;
-}
-
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
 }
 
 static void __Pyx_RaiseDoubleKeywordsError(
@@ -6357,6 +6750,84 @@ invalid_keyword:
 bad:
     return -1;
 }
+
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
+}
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
+    PyObject *self, *result;
+    PyCFunction cfunc;
+    cfunc = PyCFunction_GET_FUNCTION(func);
+    self = PyCFunction_GET_SELF(func);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = cfunc(self, arg);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+#if CYTHON_COMPILING_IN_CPYTHON
+static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_New(1);
+    if (unlikely(!args)) return NULL;
+    Py_INCREF(arg);
+    PyTuple_SET_ITEM(args, 0, arg);
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
+}
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+#ifdef __Pyx_CyFunction_USED
+    if (likely(PyCFunction_Check(func) || PyObject_TypeCheck(func, __pyx_CyFunctionType))) {
+#else
+    if (likely(PyCFunction_Check(func))) {
+#endif
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
+            return __Pyx_PyObject_CallMethO(func, arg);
+        }
+    }
+    return __Pyx__PyObject_CallOneArg(func, arg);
+}
+#else
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_Pack(1, arg);
+    if (unlikely(!args)) return NULL;
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
+}
+#endif
 
 static void __Pyx_RaiseArgumentTypeInvalid(const char* name, PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError,
@@ -6800,6 +7271,14 @@ bad:
     Py_XDECREF(empty_list);
     Py_XDECREF(empty_dict);
     return module;
+}
+
+static PyObject *__Pyx_GetNameInClass(PyObject *nmspace, PyObject *name) {
+    PyObject *result;
+    result = __Pyx_PyObject_GetAttrStr(nmspace, name);
+    if (!result)
+        result = __Pyx_GetModuleGlobalName(name);
+    return result;
 }
 
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
