@@ -48,6 +48,8 @@ cdef extern from "../src/image.h":
 
     image resize_image(image inp, int w, int h)
     void free_image(image inp)
+    image load_image(char *filename, int w, int h, int c)
+    image load_image_color(char *filename, int w, int h)
 
 cdef extern from "../src/parser.h":
     network parse_network_cfg(char *filename)
@@ -80,6 +82,13 @@ cdef class Image:
         res.set_ndarray(arr)
         return res
 
+    @staticmethod
+    def load(fname, width, height):
+        cdef image res_img = load_image_color(fname, width, height)
+        cdef Image res = Image()
+        res.img = res_img
+        return res
+
     def width(self):
         return self.img.w
 
@@ -96,8 +105,8 @@ cdef class Image:
         cdef np.ndarray floats = inp.astype(np.float32, order='C')
         self.ndarray = floats
         cdef image input_image
-        input_image.w = floats.shape[0]
-        input_image.h = floats.shape[1]
+        input_image.w = floats.shape[1]
+        input_image.h = floats.shape[0]
         input_image.c = floats.shape[2]
         input_image.data = <float *> floats.data
         self.img = input_image
